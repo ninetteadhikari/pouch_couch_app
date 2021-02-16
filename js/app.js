@@ -11,12 +11,12 @@
   var db = new PouchDB('todos');
   var remoteCouch = false;
 
-  // db.info((err, info) => {
-  //   db.changes({
-  //     since: info.update_seq,
-  //     live: true,
-  //   }).on('change', showTodos);
-  // });
+  db.info((err, info) => {
+    db.changes({
+      since: info.update_seq,
+      live: true,
+    }).on('change', showTodos);
+  });
   // We have to create a new todo document and enter it in the database
   function addTodo(text) {
     var todo = {
