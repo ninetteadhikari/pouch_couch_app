@@ -9,7 +9,7 @@
   // EDITING STARTS HERE (you dont need to edit anything above this line)
 
   var db = new PouchDB('todos');
-  var remoteCouch = false;
+  var remoteCouch = 'http://localhost:5984/todos';
 
   db.info((err, info) => {
     db.changes({
@@ -72,6 +72,10 @@
 
   // Initialise a sync with the remote server
   function sync() {
+    syncDom.setAttribute('data-sync-state', 'syncing');
+    var opts = {live: true};
+    db.sync(remoteCouch, opts, syncError);
+
   }
 
   // EDITING STARTS HERE (you dont need to edit anything below this line)
